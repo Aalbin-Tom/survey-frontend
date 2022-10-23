@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function AdminLogin() {
     const initialValues = { email: "", password: "" };
@@ -30,7 +30,7 @@ function AdminLogin() {
         if (regEx.test(formValues.email) && formValues.email.length !== 0 && formValues.password.length !== 0) {
             try {
                 console.log("hiiiiiiiii");
-                const { data } = await axios.post('/admin/login', formValues)
+                const { data } = await axios.post('https://surveys-application.herokuapp.com/admin/login', formValues)
                 localStorage.setItem('adminInfo', JSON.stringify(data))
                 navigate('/admin')
             } catch (error) {
@@ -92,6 +92,9 @@ function AdminLogin() {
                 <button type='submit' className=' w-full inline-block px-12 py-2.5 bg-green-600 text-white  leading-tight text-xl font-bold rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out  shadow-green-600/50 '>
                     Login
                 </button>
+                <NavLink to='/'>
+                   User Login
+                </NavLink>
                 <br />
                 <br />
 

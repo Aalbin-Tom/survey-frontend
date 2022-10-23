@@ -33,8 +33,8 @@ function AdminHome() {
       console.log(error);
         if (formValues.q1.length !== 0 && formValues.a1.length !== 0 && formValues.a2.length !== 0 && formValues.a3.length !== 0 && formValues.a4.length !== 0) {
             try {
-                await axios.post('/admin/add-survey', formValues)
-
+                await axios.post('https://surveys-application.herokuapp.com/admin/add-survey', formValues)
+        
             } catch (error) {
                 setMessages(error.response.data.message)
                 
@@ -47,7 +47,7 @@ function AdminHome() {
     }
 console.log(error);
     const survey = async () => {
-        const surveys = await axios.get('/admin/survey')
+        const surveys = await axios.get('https://surveys-application.herokuapp.com/admin/survey')
         setSurveys(surveys.data.survey)
     }
     useEffect(() => {

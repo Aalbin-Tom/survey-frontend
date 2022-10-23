@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import {  NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function UserLog() {
@@ -30,7 +30,7 @@ function UserLog() {
         if (regEx.test(formValues.email) && formValues.email.length !== 0 && formValues.password.length !== 0 && formValues.name.length !== 0) {
             try {
                 console.log("hiiiiiiiii");
-                const { data } = await axios.post('/login', formValues)
+                const { data } = await axios.post('https://surveys-application.herokuapp.com/login', formValues)
                 localStorage.setItem('userInfo', JSON.stringify(data))
                 navigate('/home')
             } catch (error) {
@@ -96,7 +96,7 @@ function UserLog() {
                         name='password'
                         id="password"
                         type="password"
-                        placeholder='Enter Your Email'
+                        placeholder='Enter Your Password'
                     />  <span>{error && formValues.password.length <= 0 ?
                         <label style={{ color: "red" }} >Password cannot be empty </label> : ""}</span>
                     <br />
@@ -108,6 +108,9 @@ function UserLog() {
                 <button type='submit' className=' w-full inline-block px-12 py-2.5 bg-green-600 text-white  leading-tight text-xl font-bold rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out  shadow-green-600/50 '>
                     Login
                 </button>
+                <NavLink to='/admin/login'>
+               Admin Login 
+                </NavLink>
                 <br />
                 <br />
 

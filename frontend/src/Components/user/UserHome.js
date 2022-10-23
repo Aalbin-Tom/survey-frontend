@@ -29,8 +29,9 @@ function UserHome() {
     // }
 
     const survey = async () => {
-        const surveys = await axios.get('/getsurvey')
+        const surveys = await axios.get('https://surveys-application.herokuapp.com/getsurvey')
         setSurveys(surveys.data.survey)
+        
     }
    
     const ondata = (data, anser) => {
@@ -51,10 +52,10 @@ function UserHome() {
     }, [])
 
 
-    const hsub = (e, _id) => {
+    const hsub = async(e, _id) => {
         try {
             e.preventDefault()
-            axios.post('/survey', { ans, formdata, _id, userid })
+            const {data}= await axios.post('https://surveys-application.herokuapp.com/survey', { ans, formdata, _id, userid })
         } catch(error) {
             setError(error.response.data.message) 
         }
@@ -75,7 +76,7 @@ function UserHome() {
                 {
                     surveys.map((data, index) => (
                         <div key={index} className='bg-slate-400 rounded-xl'>
-                            <span> {error}</span>
+                            <span className='text-red-700'> {error}</span>
                             <div className='font-bold'>Question: {data.q1} </div>
                             <form onSubmit={(e) => { hsub(e, data._id) }}>
                                 <div className='flex justify-between w-60'>
